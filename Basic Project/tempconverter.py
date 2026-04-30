@@ -1,46 +1,52 @@
 #Temperature Converter - Convert between Celsius, Fahrenheit, and Kelvin with input validation and exception handling
-def c_to_f(c):
-    return (c*9/5) + 32
-def c_to_k(c):
-    return c + 273.15
-def f_to_c(f):
-    return (f-32)*5/9
-def f_to_k(f):
-    return (f-32)*5/9 + 273.15
-def k_to_c(k):
-    return k-273.15
-def k_to_f(k):
-    return (k-273.15)*9/5 + 32
-
-temp = float(input("Enter temperature value: "))
-from_unit = input("Enter unit (C/F/K): ").strip().upper()
-to_unit = input("Convert to (C/F/K): ").strip().upper()
 
 
+#C= 5/9(F-32)
+#K=5/9(F-32)+ 273.15
 
-if from_unit == to_unit:
-    result = temp
-elif from_unit == "C" and to_unit == "F":
-    result = c_to_f(temp)
-elif from_unit == "C" and to_unit == "K":
-    result = c_to_k(temp)
-elif from_unit == "F" and to_unit == "C":
-    result = f_to_c(temp)
-elif from_unit == "F" and to_unit == "K":
-    result = f_to_k(temp)
-elif from_unit == "K" and to_unit == "C":
-    result = k_to_c(temp)
-elif from_unit == "K" and to_unit == "F":
-    result = k_to_f(temp)
+
+#logic for coversion
+def celsius_to_kelvin(c):
+    return  c + 273.15
+def celsius_to_farenh(c):
+    return  (c*9/5) + 32
+def kelvin_to_celsius(k):
+    return k - 273.15
+def kelvin_to_farenh(k):
+    return (9/5*(k-273.15)) + 32
+def farenh_to_celsius(f):
+    return 5/9*(f-32)
+def farenh_to_kelvin(f):
+    return (5/9*(f-32) + 273.15)
+
+temp_value = float(input("Enter the temperature value :"))
+from_scale = input("Enter the temperature scale(C/K/F) :").lower()
+to_scale = input("Enter the scale to be converted into(C/K/F) :").lower()
+
+if from_scale==to_scale:
+    result = temp_value
+elif from_scale=="c" and to_scale=="k":
+    result=celsius_to_farenh(temp_value)
+elif from_scale=="c" and to_scale=="f":
+    result = celsius_to_kelvin(temp_value)
+elif from_scale=="k" and to_scale=="f":
+    result = kelvin_to_farenh(temp_value)
+elif from_scale=="k" and to_scale=="c":
+    result = kelvin_to_celsius(temp_value)
+elif from_scale=="f" and to_scale=="k":
+    result = farenh_to_kelvin(temp_value)
+elif from_scale=="f" and to_scale=="c":
+    result = farenh_to_celsius(temp_value)
 else:
-    print("Invalid conversion.")
+    print("Invalid Prompt")
     result = None
 
-
 if result is not None:
-    if to_unit == "C":
-        print(f"Result: {result:.2f} °C")
-    elif to_unit == "F":
-        print(f"Result: {result:.2f} °F")
+    if to_scale == "c":
+        print(f"Result: {result:.2f} °c")
+    elif to_scale == "f":
+        print(f"Result: {result:.2f} °f")
     else:
-        print(f"Result: {result:.2f} K")
+        print(f"Result: {result:.2f} k")
+
+
